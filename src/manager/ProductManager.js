@@ -27,6 +27,24 @@ class ProductManager {
 
     async addProduct(newProduct) {
         try {
+            const campos = [
+                'title',
+                'description',
+                'code',
+                'price',
+                'status',
+                'stock',
+                'category',
+                'thumbnails'
+            ]
+
+            const camposCompletos = campos.every(f => newProduct.hasOwnProperty(f))
+
+            if(!camposCompletos) {
+                throw new Error ( 'Faltan campos requeridos' )
+            }
+
+
             const fileData = await fs.promises.readFile(this.pathFile , 'utf-8')
             const products = JSON.parse(fileData)
             const newID = this.generateNewID(products)
@@ -36,10 +54,11 @@ class ProductManager {
             products.push(product)
 
             await fs.promises.writeFile(this.pathFile, JSON.stringify( products , null , 2 ) , 'utf-8')
-            return products
+            return product
 
         } catch (error) {
-            throw new Error (`Error al agregar un nuevo producto`)
+            console.log(error)
+            throw new Error (`Error al agregar un nuevo producto: ${error.message}`)
         }
     }
 
