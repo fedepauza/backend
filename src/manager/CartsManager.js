@@ -53,7 +53,7 @@ class CartManager {
 
             await fs.promises.writeFile(this.pathFile, JSON.stringify( carts , null , 2 ), 'utf-8')
 
-            return carts
+            return cart
 
         } catch (error) {
             throw new Error (`Error al crear un nuevo carrito`)

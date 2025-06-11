@@ -1,12 +1,12 @@
 import express from 'express'
 import ProductManager from './manager/ProductManager.js'
-// import CartManager from './manager/CartsManager.js'
+import CartManager from './manager/CartsManager.js'
 
 const app = express()
 app.use(express.json())
     
 const productManager = new ProductManager('src/data/products.json')
-// const cartManager = new CartManager('./data/cart.json')
+const cartManager = new CartManager('src/data/cart.json')
 
 
     app.get("/" , ( req , res ) => {
@@ -64,6 +64,40 @@ const productManager = new ProductManager('src/data/products.json')
         } catch (error) {
             console.log(error)
             res.status(500).json({ status: "Error" , message: "Error al eliminar el producto"})
+        }
+    })
+
+    app.post("/api/cart" , async ( req , res ) => {
+        try {
+            const cart = await cartManager.createCart()
+            res.status(201).json({ status: "Success" , cart})
+        } catch (error) {
+            res.status(500).json({ status: "Error" , message: "Error al crear el nuevo carrito"})
+        }
+    })
+
+    app.get("/api/cart/:cid" , async ( req , res ) => {
+        try {
+            const cid = req.params.cid
+            const cart = await cartManager.getCartById(cid)
+
+            res.status(200).json({ status: "Succes" , cart})
+        } catch (error) {
+            res.status(500).json({ status: "Error" , message: "Error al encontrar el carrito"})
+        }
+    })
+
+    app.post("/api/cart/:cid/product/:pid" , async ( req , res ) => {
+        const { cid , pid } = req.params
+        try {
+            const cart = await cartManager.getCartById( cid )
+            await productManager.getProductById( pid )
+
+            const updatedCart = await cartManager.addProductToCart( cid , pid )
+
+            res.status(201).json({ status: "Success" , cart: updatedCart })
+        } catch (error) {
+            res.status(500).json({ status: "Error" , message: "Error al agregar producto al carrito"})
         }
     })
 
