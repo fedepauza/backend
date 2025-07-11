@@ -1,0 +1,98 @@
+import { Router  } from "express";
+import { uploader } from '../middlewares/multerConfig.js'
+import multer from "multer";
+import ProductManager from "../manager/ProductManager.js";
+import path from 'path'
+
+const router = Router()
+const productManager = new ProductManager(path.resolve('src/data/products.json'))
+const upload = multer({ dest: 'public/uploads' }) 
+
+
+
+router.get("/" , ( req , res ) => {
+    res.json({ message:'Hola Mundo' })
+})
+
+router.get("/api/products" , async ( req , res ) => {
+    try {
+        const products = await productManager.getProducts()
+        res.status(200).json({ status: "Success" , products })
+    } catch (error) {
+        res.status(500).json({ status: "Error" , message: "Error al recibir los productos"})
+    }
+})
+
+router.get("/api/products/:pid" , async ( req , res ) => {
+    try {
+        const pid = req.params.pid
+        const product = await productManager.getProductById(pid)
+        res.status(200).json({ status: "Succes" , product})
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ status: "Error" , message: "Erro al encontrar el producto"})
+    }
+})
+
+router.post("/api/products" , async ( req , res ) => {
+    try {
+        const newProduct = req.body
+        const products = await productManager.addProduct(newProduct)
+        res.status(201).json({ status: "Success" , products })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ status: "Error" , message: "Error al agregar el producto nuevo"})
+    }
+})
+
+
+router.put("/api/products/:pid" , async ( req , res ) => {
+    try {
+        const pid = req.params.pid
+        const updateProduct = req.body
+        const products = await productManager.updateProductById(pid , updateProduct)
+        res.status(201).json({ status: "Success" , products})
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ status: "Error" , message: "Error al actualizar producto"})
+    }
+} )
+
+
+router.delete("/api/products/:pid" , async ( req , res ) => {
+    try {
+        const pid = req.params.pid
+        const products = await productManager.deleteProduct(pid)
+        res.status(201).json({ status: "Success" , products})
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ status: "Error" , message: "Error al eliminar el producto"})
+    }
+})
+
+
+router.post('/upload', uploader.single('thumbnails'), (req, res) => {
+        if (!req.file) {
+        return res.status(400).json({ error: 'No se subió ningún archivo' })
+        }
+    
+        const imagePath = `/uploads/${req.file.filename}`
+        res.status(200).json({ status: 'success', path: imagePath })
+    })
+
+    router.post('/:id', upload.single('thumbnails'), async (req, res) => {
+        const { id } = req.params
+        const updates = req.body
+        if (req.file) {
+            updates.thumbnails = `/uploads/${req.file.filename}`
+        }
+    
+        try {
+            await productManager.updateProductById(parseInt(id), updates)
+            res.redirect('/home') // o a donde quieras redirigir luego de editar
+        } catch (err) {
+            res.status(500).send("Error al actualizar el producto")
+        }
+    })
+    
+export default router

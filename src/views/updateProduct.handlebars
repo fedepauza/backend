@@ -1,0 +1,21 @@
+    <div id="edit-container" style="display: none">
+            <h2>Editar producto:</h2>
+            <form id="edit-form" action="/api/products/{{product.id}}" method="POST">
+                <input type="hidden" name="id" value="{{product.id}}" />
+                <h3>Producto:</h3>
+                    <input type="text" id="edit-title" required />
+                <h3>Precio:</h3>
+                    <input type="text" id="edit-price" required />
+                <h3>Categoria:</h3>
+                    <input type="text" id="edit-category" required />
+                <h3>Descripcion:</h3>
+                    <input type="text" id="edit-description" required />
+                <h3>Stock:</h3>
+                    <input type="text" id="edit-stock" required />
+                <h3>Subir imagen:</h3>
+                    <input type="text" id="edit-thumbnails" required />
+
+                <button type="submit">Guardar cambios</button>
+                <button type="button" id="cancel-edit">Cancelar</button>
+            </form>
+    </div> 

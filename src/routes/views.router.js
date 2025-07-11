@@ -1,0 +1,29 @@
+import { Router  } from "express";
+import path from 'path'
+import __dirname from "../utils.js";
+import ProductManager from "../manager/ProductManager.js";
+
+const router = Router()
+const productManager = new ProductManager(path.join(__dirname , 'data/products.json'))
+
+router.get('/home', async ( req , res ) => {
+    const products = await productManager.getProducts()
+    console.log(products)
+    res.render('home' , { title: "Productos disponibles" , products , currentPage: 'home' }) 
+} )
+
+router.get('/realTimeProducts' , ( req , res ) => {
+    res.render('realTimeProducts' , {title: "Manejador de productos"})
+})
+
+router.get('/edit/:id', async (req, res) => {
+    const { id } = req.params
+    try {
+        const product = await productManager.getProductById(id)
+        res.render('updateProduct', { product })
+    } catch (error) {
+        res.status(404).send("Producto no encontrado")
+    }
+})
+
+export default router

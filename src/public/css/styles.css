@@ -1,0 +1,124 @@
+* {
+    background-color: rgb(29, 29, 29);
+    color: rgb(239, 235, 229);
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.real-time-products {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+.div-formulario-productos {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.div-formulario-productos input {
+    width: 75%;
+    margin: auto;
+    height: 25px;
+    border: none;
+    border-bottom: 1px solid antiquewhite;
+}
+
+.div-formulario-productos button {
+    width: 100px;
+    height: 25px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(173, 35, 35);
+    color: antiquewhite;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    cursor: pointer;
+}
+
+
+.div-formulario-productos input:focus {
+    outline: none;
+}
+
+.form-preview {
+    display: flex;
+    gap: 50px;
+    margin-top: 50px;
+}
+
+.nav-bar {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    background-color: green;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.nav-bar h2 {
+    background-color: green;
+}
+
+.nav-bar a {
+    background: none;
+}
+
+.nav-bar button {
+    width: 140px;
+    height: 25px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(173, 35, 35);
+    color: antiquewhite;
+    cursor: pointer;
+}
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.home-products-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 75%;
+    margin: auto;
+    margin-top: 50px;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 10px 10px 15px rgba(116, 115, 115, 0.358);
+    background-color: green;
+    min-height: 100%;
+}
+
+
+.product-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    width: 200px;
+    height: 300px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+
+.product-card:hover {
+    transform: scale(1.1);
+}
+
+.product-card .product-image {
+    width: 100%;
+}

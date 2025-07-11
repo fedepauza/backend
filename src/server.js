@@ -1,106 +1,49 @@
 import express from 'express'
-import ProductManager from './manager/ProductManager.js'
-import CartManager from './manager/CartsManager.js'
+import { engine } from 'express-handlebars'
+import { Server } from 'socket.io'
+import __dirname from './utils.js'
+import * as path from 'path'
+import productsRouter from './routes/products.router.js'
+import cartsRouter from './routes/cart.router.js'
+import viewsRouter from './routes/views.router.js'
+import {configureSockets} from './sockets/socket.js'
 
 const app = express()
+
+// Middleware
+
 app.use(express.json())
-    
-const productManager = new ProductManager('src/data/products.json')
-const cartManager = new CartManager('src/data/cart.json')
+app.use(express.urlencoded({extended: true}))
+app.use(express.static(path.join(__dirname , 'public')))
 
 
-    app.get("/" , ( req , res ) => {
-        res.json({ message:'Hola Mundo' })
-    })
+// Handlebars
 
-    app.get("/api/products" , async ( req , res ) => {
-        try {
-            const products = await productManager.getProducts()
-            res.status(200).json({ status: "Success" , products })
-        } catch (error) {
-            res.status(500).json({ status: "Error" , message: "Error al recibir los productos"})
-        }
-    })
+app.engine("handlebars" , engine())
+app.set("view engine" , "handlebars" )
+app.set("views" , path.resolve(__dirname , 'views') )
 
-    app.get("/api/products/:pid" , async ( req , res ) => {
-        try {
-            const pid = req.params.pid
-            const product = await productManager.getProductById(pid)
-            res.status(200).json({ status: "Succes" , product})
-        } catch (error) {
-            console.log(error)
-            res.status(500).json({ status: "Error" , message: "Erro al encontrar el producto"})
-        }
-    })
+// Routes
 
-    app.post("/api/products" , async ( req , res ) => {
-        try {
-            const newProduct = req.body
-            const products = await productManager.addProduct(newProduct)
-            res.status(201).json({ status: "Success" , products })
-        } catch (error) {
-            console.log(error)
-            res.status(500).json({ status: "Error" , message: "Error al agregar el producto nuevo"})
-        }
-    })
+app.use('/api/products' , productsRouter)
+app.use('/api/carts' , cartsRouter)
+app.use('/', viewsRouter)
 
-    app.put("/api/products/:pid" , async ( req , res ) => {
-        try {
-            const pid = req.params.pid
-            const updateProduct = req.body
-            const products = await productManager.updateProductById(pid , updateProduct)
-            res.status(201).json({ status: "Success" , products})
-        } catch (error) {
-            console.log(error)
-            res.status(500).json({ status: "Error" , message: "Error al actualizar producto"})
-        }
-    } )
+// Main Route
 
-    app.delete("/api/products/:pid" , async ( req , res ) => {
-        try {
-            const pid = req.params.pid
-            const products = await productManager.deleteProduct(pid)
-            res.status(201).json({ status: "Success" , products})
-        } catch (error) {
-            console.log(error)
-            res.status(500).json({ status: "Error" , message: "Error al eliminar el producto"})
-        }
-    })
+app.get('/' , ( req , res ) => {
+    res.render('home' , { title: "Home"})
+})
 
-    app.post("/api/cart" , async ( req , res ) => {
-        try {
-            const cart = await cartManager.createCart()
-            res.status(201).json({ status: "Success" , cart})
-        } catch (error) {
-            res.status(500).json({ status: "Error" , message: "Error al crear el nuevo carrito"})
-        }
-    })
 
-    app.get("/api/cart/:cid" , async ( req , res ) => {
-        try {
-            const cid = req.params.cid
-            const cart = await cartManager.getCartById(cid)
 
-            res.status(200).json({ status: "Succes" , cart})
-        } catch (error) {
-            res.status(500).json({ status: "Error" , message: "Error al encontrar el carrito"})
-        }
-    })
 
-    app.post("/api/cart/:cid/product/:pid" , async ( req , res ) => {
-        const { cid , pid } = req.params
-        try {
-            const cart = await cartManager.getCartById( cid )
-            await productManager.getProductById( pid )
+// Socket.io + Servidor 
 
-            const updatedCart = await cartManager.addProductToCart( cid , pid )
-
-            res.status(201).json({ status: "Success" , cart: updatedCart })
-        } catch (error) {
-            res.status(500).json({ status: "Error" , message: "Error al agregar producto al carrito"})
-        }
-    })
-
-app.listen( 8080 , () => {
+const httpServer = app.listen( 8080 , () => {
     console.log("Servidor funcionando correctamente ✅")
 })
+
+const io = new Server(httpServer)
+
+configureSockets(io)

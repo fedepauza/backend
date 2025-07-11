@@ -4,6 +4,8 @@ import fs from 'fs'
 class ProductManager {
     constructor(pathFile) {
         this.pathFile = pathFile
+
+        console.log('📂 Ruta de archivo:', this.pathFile)
     }
 
     async getProducts() {
@@ -30,20 +32,11 @@ class ProductManager {
             const campos = [
                 'title',
                 'description',
-                'code',
                 'price',
-                'status',
                 'stock',
                 'category',
-                'thumbnails'
+                // 'thumbnails'
             ]
-
-            const camposCompletos = campos.every(f => newProduct.hasOwnProperty(f))
-
-            if(!camposCompletos) {
-                throw new Error ( 'Faltan campos requeridos' )
-            }
-
 
             const fileData = await fs.promises.readFile(this.pathFile , 'utf-8')
             const products = JSON.parse(fileData)

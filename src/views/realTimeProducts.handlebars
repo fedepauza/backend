@@ -1,0 +1,31 @@
+
+<div class="real-time-products">
+    <h1>Manejador de productos</h1>
+    <div class="form-preview">
+        <div>
+            <form id="product-form" class="div-formulario-productos" enctype="multipart/form-data">
+                <h3>Producto:</h3>
+                    <input type="text" name="title" id="title" placeholder="Nombre del producto" required>
+                <h3>Precio:</h3>
+                    <input type="text" name="price" id="price" placeholder="Precio" type="number" required>
+                <h3>Categoria:</h3>
+                    <input type="text" name="category" id="category" placeholder="Categoria" required>
+                <h3>Descripcion:</h3>
+                    <input type="text" name="description" id="description" placeholder="Descripcion del producto" required>
+                <h3>Stock</h3>
+                    <input type="text" name="stock" id="stock" placeholder="Stock" type="number" required>
+                <h3>Subir imagen</h3>
+                    <input type="file" name="thumbnails" id="thumbnails">
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        <div>
+            <h2>Vista Previa</h2>
+                <div class="product-preview" id="product-list"></div>
+        </div>
+    </div>
+</div>
+
+
+<script src='./socket.io/socket.io.js'></script>
+<script src='/js/realTime.js'></script>
