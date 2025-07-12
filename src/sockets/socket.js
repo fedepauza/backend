@@ -22,7 +22,7 @@ export const configureSockets = (io) => {
         })
 
         socket.on('delete-product', async (id) => {
-            await productManager.deleteProduct(id)
+            await productManager.deleteProduct(parseInt(id))
             
             const updatedProducts = await productManager.getProducts()
             io.emit('products', updatedProducts)

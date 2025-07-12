@@ -7,6 +7,7 @@ import productsRouter from './routes/products.router.js'
 import cartsRouter from './routes/cart.router.js'
 import viewsRouter from './routes/views.router.js'
 import {configureSockets} from './sockets/socket.js'
+import methodOverride from 'method-override'
 
 const app = express()
 
@@ -15,7 +16,7 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static(path.join(__dirname , 'public')))
-
+app.use(methodOverride('_method'))
 
 // Handlebars
 
@@ -28,6 +29,7 @@ app.set("views" , path.resolve(__dirname , 'views') )
 app.use('/api/products' , productsRouter)
 app.use('/api/carts' , cartsRouter)
 app.use('/', viewsRouter)
+
 
 // Main Route
 

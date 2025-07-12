@@ -1,21 +1,23 @@
-    <div id="edit-container" style="display: none">
+    <div id="edit-container" class="editContainer">
             <h2>Editar producto:</h2>
-            <form id="edit-form" action="/api/products/{{product.id}}" method="POST">
-                <input type="hidden" name="id" value="{{product.id}}" />
-                <h3>Producto:</h3>
-                    <input type="text" id="edit-title" required />
-                <h3>Precio:</h3>
-                    <input type="text" id="edit-price" required />
-                <h3>Categoria:</h3>
-                    <input type="text" id="edit-category" required />
-                <h3>Descripcion:</h3>
-                    <input type="text" id="edit-description" required />
-                <h3>Stock:</h3>
-                    <input type="text" id="edit-stock" required />
-                <h3>Subir imagen:</h3>
-                    <input type="text" id="edit-thumbnails" required />
 
-                <button type="submit">Guardar cambios</button>
-                <button type="button" id="cancel-edit">Cancelar</button>
-            </form>
+    {{#if product}}
+                <form id="edit-form" action="/api/products/form/{{product.id}}" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="id" id="edit-id" value="{{product.id}}" />
+                    <h3>Producto:</h3>
+                        <input type="text" id="edit-title" name="title" value="{{product.title}}" required />
+                    <h3>Precio:</h3>
+                        <input type="text" id="edit-price" name="price" value="{{product.price}}" required />
+                    <h3>Categoria:</h3>
+                        <input type="text" id="edit-category" name="category" value="{{product.category}}" required />
+                    <h3>Descripcion:</h3>
+                        <input type="text" id="edit-description" name="description" value="{{product.description}}" required />
+                    <h3>Stock:</h3>
+                        <input type="text" id="edit-stock" name="stock" value="{{product.stock}}" required />
+                    <button type="submit">Guardar cambios</button>
+                    <a href="/home"><button type="button">Cancelar</button></a>
+                </form>
+        {{else}}
+        <p>Producto no encontrado</p>
+    {{/if}}
     </div> 

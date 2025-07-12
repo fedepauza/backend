@@ -20,9 +20,10 @@ router.get('/edit/:id', async (req, res) => {
     const { id } = req.params
     try {
         const product = await productManager.getProductById(id)
-        res.render('updateProduct', { product })
+        if (!product) return res.status(404).send("Producto no encontrado")
+        res.render('updateProduct', { product }) 
     } catch (error) {
-        res.status(404).send("Producto no encontrado")
+        res.status(500).send("Error al buscar producto")
     }
 })
 

@@ -43,7 +43,7 @@ form.addEventListener('submit', async (e) => {
 
     products.forEach(p => {
         const card = document.createElement('div')
-        card.classList.add('product-list')
+        card.classList.add('product-lists')
         card.innerHTML = `
         <h3>${p.title}</h3>
         <p>Precio: $${p.price}</p>
@@ -58,6 +58,7 @@ form.addEventListener('submit', async (e) => {
     document.querySelectorAll('.delete-btn').forEach(btn => {
         btn.addEventListener('click', () => {
         const id = btn.getAttribute('data-id')
+        console.log('Boton eliminar' , id)
         socket.emit('delete-product', parseInt(id))
         })
     })
@@ -105,5 +106,5 @@ form.addEventListener('submit', async (e) => {
     socket.emit('update-product', { id, ...updatedProduct })
 
     document.getElementById('edit-form').reset()
-    document.getElementById('edit-container').style.display = 'none'
+    // document.getElementById('edit-container').style.display = 'none'
 })

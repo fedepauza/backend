@@ -106,19 +106,133 @@
 
 
 .product-card {
-    background-color: white;
+    background-color: rgb(52, 51, 51);
     border-radius: 10px;
     padding: 10px;
     width: 200px;
     height: 300px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     transition: transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    
 }
-
 .product-card:hover {
-    transform: scale(1.1);
+    transform: scale(1.22);
 }
 
-.product-card .product-image {
+.product-card img {
     width: 100%;
+}
+
+.product-card h3{
+    background-color: rgb(52, 51, 51);
+}
+.product-card p{
+    background-color: rgb(52, 51, 51);
+    text-align: center;
+}
+.product-card img{
+    background-color: rgb(52, 51, 51);
+    max-height: 120px;
+    object-fit: contain;
+}
+
+
+.preview-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.product-lists {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-bottom: 1px solid antiquewhite;
+    padding: 7px;
+    margin-bottom: 10px;
+}
+
+.product-lists a {
+    margin: auto;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    width: 100px;
+    height: 25px;
+    background-color: green;
+    color: antiquewhite;
+    cursor: pointer;
+    margin: auto;
+    text-align: center;
+    align-content: center;
+    font-size: 13px;
+}
+
+.product-lists button {
+    width: 100px;
+    height: 25px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(173, 35, 35);
+    color: antiquewhite;
+    cursor: pointer;
+    margin: auto;
+    font-size: 13px;
+
+}
+
+.editContainer {
+    width: 100%;
+    margin: auto;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+
+.editContainer form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+}
+
+.editContainer input {
+    width: 100%;
+    height: 25px;
+    border: none;
+    border-bottom: 1px solid antiquewhite;
+    margin-bottom: 10px;
+}
+
+.editContainer input:focus {
+    outline: none;
+}
+
+.editContainer button {
+    width: 150px;
+    height: 25px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(173, 35, 35);
+    color: antiquewhite;
+    margin: auto;
+    cursor: pointer;
+}
+.editContainer a {
+    width: 150px;
+    height: 0;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(173, 35, 35);
+    color: antiquewhite;
+    margin: auto;
+    cursor: pointer;
 }

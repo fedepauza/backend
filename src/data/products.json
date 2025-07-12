@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "id": 1,
+    "title": "Yerba Mate Playadito",
+    "price": 1500,
+    "category": "Yerbas",
+    "stock": 40,
+    "description": "yerba mate suave",
+    "thumbnails": "/uploads/thumbnails-1752298595938-160785987.jpeg"
+  }
+]

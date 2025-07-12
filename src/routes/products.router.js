@@ -61,7 +61,7 @@ router.put("/api/products/:pid" , async ( req , res ) => {
 
 router.delete("/api/products/:pid" , async ( req , res ) => {
     try {
-        const pid = req.params.pid
+        const pid = req.params
         const products = await productManager.deleteProduct(pid)
         res.status(201).json({ status: "Success" , products})
     } catch (error) {
@@ -70,29 +70,30 @@ router.delete("/api/products/:pid" , async ( req , res ) => {
     }
 })
 
-
 router.post('/upload', uploader.single('thumbnails'), (req, res) => {
-        if (!req.file) {
-        return res.status(400).json({ error: 'No se subió ningún archivo' })
-        }
-    
-        const imagePath = `/uploads/${req.file.filename}`
-        res.status(200).json({ status: 'success', path: imagePath })
-    })
+    if (!req.file) {
+    return res.status(400).json({ error: 'No se subió ningún archivo' })
+    }
 
-    router.post('/:id', upload.single('thumbnails'), async (req, res) => {
-        const { id } = req.params
-        const updates = req.body
-        if (req.file) {
-            updates.thumbnails = `/uploads/${req.file.filename}`
-        }
+    const imagePath = `/uploads/${req.file.filename}`
+    res.status(200).json({ status: 'success', path: imagePath })
+})
+
+router.post('/form/:id', upload.single('thumbnails'), async (req, res) => {
+    const { id } = req.params
+    const updates = req.body
+    if (req.file) {
+        updates.thumbnails = `/uploads/${req.file.filename}`
+    }
     
-        try {
-            await productManager.updateProductById(parseInt(id), updates)
-            res.redirect('/home') // o a donde quieras redirigir luego de editar
-        } catch (err) {
-            res.status(500).send("Error al actualizar el producto")
-        }
-    })
-    
+    try {
+        await productManager.updateProductById(parseInt(id), updates)
+        res.redirect('/home')
+    } catch (err) {
+        res.status(500).send("Error al actualizar el producto")
+    }
+})
+
+
+
 export default router

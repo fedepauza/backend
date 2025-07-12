@@ -20,8 +20,9 @@ class ProductManager {
     }
 
     generateNewID(products) {
-        if(products.length > 0) {
-            return products[ products.length - 1 ].id + 1
+        if (products.length > 0) {
+            const ids = products.map(p => Number(p.id))
+            return Math.max(...ids) + 1
         } else {
             return 1
         }
@@ -59,7 +60,8 @@ class ProductManager {
         try {
             const fileData = await fs.promises.readFile(this.pathFile , 'utf-8')
             const products = JSON.parse(fileData)
-            const productIndex = products.findIndex((p) => p.id === parseInt(idProduct))
+            const productIndex = products.findIndex(p => parseInt(p.id) === parseInt(idProduct))
+
 
             if ( productIndex === -1) throw new Error ( `Producto con el ID: ${idProduct}, no pudo ser encontrado` )
                 products.splice( productIndex , 1 )
@@ -76,7 +78,8 @@ class ProductManager {
         try {
             const fileData = await fs.promises.readFile(this.pathFile , 'utf-8')
             const products = JSON.parse(fileData)
-            const productIndex = products.findIndex((p) => p.id === parseInt(idProduct))
+            const productIndex = products.findIndex(p => parseInt(p.id) === parseInt(idProduct))
+
             
             if ( productIndex === -1) throw new Error ( `Producto con el ID: ${idProduct}, no pudo ser encontrado` )
 
@@ -94,7 +97,7 @@ class ProductManager {
         try {
             const fileData = await fs.promises.readFile(this.pathFile , 'utf-8')
             const products = JSON.parse(fileData)
-            const product = products.find((p) => p.id === parseInt(idProduct))
+            const product = products.find((p) => parseInt(p.id) === parseInt(idProduct))
 
             if (!product) throw new Error ( `No se encontro el producto con el ID: ${idProduct}` )
             return product
