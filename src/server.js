@@ -8,8 +8,12 @@ import cartsRouter from './routes/cart.router.js'
 import viewsRouter from './routes/views.router.js'
 import {configureSockets} from './sockets/socket.js'
 import methodOverride from 'method-override'
+import connectMongoDb from './config/db.js'
+import dotenv from 'dotenv'
 
 const app = express()
+
+connectMongoDb()
 
 // Middleware
 

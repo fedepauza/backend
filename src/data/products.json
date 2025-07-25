@@ -1,11 +1,20 @@
 [
   {
     "id": 1,
-    "title": "Yerba Mate Playadito",
+    "title": "Yerba mate",
     "price": 1500,
-    "category": "Yerbas",
-    "stock": 40,
-    "description": "yerba mate suave",
-    "thumbnails": "/uploads/thumbnails-1752298595938-160785987.jpeg"
+    "category": "Yerba Mate",
+    "stock": 2,
+    "description": "yerba mate playadito",
+    "thumbnails": "/uploads/thumbnails-1752336407258-83428907.jpeg"
+  },
+  {
+    "id": 2,
+    "title": "Banana",
+    "price": 200,
+    "category": "Frutas",
+    "stock": 12,
+    "description": "Banana ecuador ",
+    "thumbnails": "/uploads/thumbnails-1753456716674-26834414.jpeg"
   }
 ]

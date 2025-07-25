@@ -120,7 +120,7 @@
     
 }
 .product-card:hover {
-    transform: scale(1.22);
+    transform: scale(1.1);
 }
 
 .product-card img {
@@ -235,4 +235,31 @@
     color: antiquewhite;
     margin: auto;
     cursor: pointer;
+}
+
+.logo-cart {
+    width:40px;
+    height: 40px;
+    background-color: green;
+    cursor: pointer;
+}
+
+.logo-cart:hover {
+    transform: scale(1.1);
+}
+
+.div-button-nav {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    background-color: green;
+}
+
+.button-nav {
+    cursor: pointer;
+}
+
+.button-nav:hover {
+    transform: scale(1.05);
 }

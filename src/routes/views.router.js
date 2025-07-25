@@ -16,6 +16,10 @@ router.get('/realTimeProducts' , ( req , res ) => {
     res.render('realTimeProducts' , {title: "Manejador de productos"})
 })
 
+router.get('/cart' , ( req , res ) => {
+    res.render('cart' , {title: "Carrito de compras" , isCartPage: 'cart'})
+})
+
 router.get('/edit/:id', async (req, res) => {
     const { id } = req.params
     try {

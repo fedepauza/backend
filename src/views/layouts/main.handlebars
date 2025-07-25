@@ -10,11 +10,16 @@
     <nav>
         <div class="nav-bar">
             <h2>Tienda del Mate</h2>
+            <div class="div-button-nav">
                 {{#if currentPage}}
                     {{>agregarProducto}}
                     {{else}}
                         {{>inicio}}
                 {{/if}}
+                {{#unless isCartPage}}
+                    {{>cartButton}}
+                {{/unless}}
+            </div>
         </div>
     </nav>
     {{{body}}}
