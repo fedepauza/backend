@@ -9,12 +9,12 @@
         <img src="{{product.thumbnails}}" alt="{{product.title}}" class="product-img" />
 
         <div class="actions">
-            <a href="/edit/{{product._id}}" class="btn btn-primary">Editar</a>
-            <form action="/api/products/{{product._id}}" method="POST" onsubmit="return confirm('¿Estás seguro que deseas eliminar este producto?')">
+            <a href="/edit/{{product.id}}" class="btn btn-primary">Editar</a>
+            <form action="/api/products/{{product.id}}" method="POST" onsubmit="return confirm('¿Estás seguro que deseas eliminar este producto?')">
                 <input type="hidden" name="_method" value="DELETE" />
                 <button type="submit" class="btn btn-danger">Eliminar</button>
             </form>
-                <button id="add-to-cart" data-id="{{product._id}}">Agregar al carrito</button>
+                <button id="add-to-cart" data-id="{{product.id}}">Agregar al carrito</button>
 
         </div>
     </div>

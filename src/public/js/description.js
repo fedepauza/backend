@@ -1,12 +1,14 @@
 const btnAddToCart = document.getElementById('add-to-cart')
 
 btnAddToCart.addEventListener('click', async () => {
-    const productId = btnAddToCart.dataset.id
-    const cartId = '64eac9e8e3d4f6c14b78fc0f'
+    const pid = btnAddToCart.dataset.id
+    console.log("Producto ID:", pid)
+
+    const cid = '1'
 
     
     try {
-        const response = await fetch(`/api/cart/${cartId}/product/${productId}`, {
+        const response = await fetch(`/api/cart/${cid}/product/${pid}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
