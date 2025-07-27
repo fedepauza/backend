@@ -9,12 +9,30 @@
     "thumbnails": "/uploads/thumbnails-1752336407258-83428907.jpeg"
   },
   {
-    "id": 2,
+    "id": "2",
     "title": "Banana",
-    "price": 200,
+    "price": "200",
     "category": "Frutas",
-    "stock": 12,
+    "stock": "2",
     "description": "Banana ecuador ",
     "thumbnails": "/uploads/thumbnails-1753456716674-26834414.jpeg"
+  },
+  {
+    "id": "3",
+    "title": "Mouse",
+    "price": "233",
+    "category": "Tecnologia",
+    "stock": "12",
+    "description": "Mouse Logitech",
+    "thumbnails": "/uploads/thumbnails-1753457338795-646537442.jpeg"
+  },
+  {
+    "id": 4,
+    "title": "Libro",
+    "price": 1200,
+    "category": "Libros",
+    "stock": 2,
+    "description": "Libro de autoayuda",
+    "thumbnails": "/uploads/thumbnails-1753457610968-749531870.jpeg"
   }
 ]

@@ -20,6 +20,18 @@ router.get('/cart' , ( req , res ) => {
     res.render('cart' , {title: "Carrito de compras" , isCartPage: 'cart'})
 })
 
+router.get('/description/:pid' , async ( req , res ) => {
+    const { pid } = req.params
+
+    try {
+        const product = await productManager.getProductById(pid)
+        if (!product) return res.status(404).send("Producto no encontrado")
+        res.render('description' , {title: "Info del producto" , product})
+    } catch (error) {
+        res.status(500).send("Error al buscar producto")
+    }
+})
+
 router.get('/edit/:id', async (req, res) => {
     const { id } = req.params
     try {

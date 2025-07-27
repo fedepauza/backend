@@ -106,5 +106,4 @@ form.addEventListener('submit', async (e) => {
     socket.emit('update-product', { id, ...updatedProduct })
 
     document.getElementById('edit-form').reset()
-    // document.getElementById('edit-container').style.display = 'none'
 })

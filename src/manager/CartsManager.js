@@ -65,17 +65,17 @@ class CartManager {
             const fileData = await fs.promises.readFile( this.pathFile , 'utf8' )
             const carts = JSON.parse(fileData)
 
-            const cartIndex = carts.findIndex( c => c.id === Number(cid) )
+            const cartIndex = carts.findIndex( c => c.id === cid )
             if ( cartIndex === -1 ) throw new Error( `Carrito con el ID: ${cid}, no se encuentra` )
             
             const cart = carts[cartIndex]
 
-            const productsInCart = cart.products.find(p => p.product === Number(pid))
+            const productsInCart = cart.products.find(p => p.product === pid)
 
             if(productsInCart){
                 productsInCart.quantity += 1 
             } else {
-                cart.products.push({ product: Number(pid) , quantity: 1 })
+                cart.products.push({ product: pid , quantity: 1 })
             }
 
             carts[cartIndex] = cart 

@@ -1,0 +1,24 @@
+<div class="product-description-card">
+    <div class="product-info">
+        
+        <h2>{{product.title}}</h2>
+        <p><strong>Precio:</strong> ${{product.price}}</p>
+        <p><strong>Stock:</strong> {{product.stock}}</p>
+        <p><strong>Categoría:</strong> {{product.category}}</p>
+        <p><strong>Descripción:</strong> {{product.description}}</p>
+        <img src="{{product.thumbnails}}" alt="{{product.title}}" class="product-img" />
+
+        <div class="actions">
+            <a href="/edit/{{product._id}}" class="btn btn-primary">Editar</a>
+            <form action="/api/products/{{product._id}}" method="POST" onsubmit="return confirm('¿Estás seguro que deseas eliminar este producto?')">
+                <input type="hidden" name="_method" value="DELETE" />
+                <button type="submit" class="btn btn-danger">Eliminar</button>
+            </form>
+                <button id="add-to-cart" data-id="{{product._id}}">Agregar al carrito</button>
+
+        </div>
+    </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/description.js"></script> 

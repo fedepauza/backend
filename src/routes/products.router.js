@@ -53,7 +53,7 @@ productRouter.post("/api/products" , async ( req , res ) => {
 })
 
 
-productRouter.put("/api/products/:pid" , async ( req , res ) => {
+productRouter.post("/api/products/:pid" , async ( req , res ) => {
     try {
         const pid = req.params.pid
         const updateData = req.body

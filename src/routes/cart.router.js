@@ -37,6 +37,12 @@ router.post("/api/cart/:cid/product/:pid" , async ( req , res ) => {
 
         const updatedCart = await cartManager.addProductToCart( cid , pid )
 
+        return res.status(201).json({
+            status: "Success",
+            message: "Producto agregado al carrito",
+            cart: updatedCart
+        })
+
         res.status(201).json({ status: "Success" , cart: updatedCart })
     } catch (error) {
         res.status(500).json({ status: "Error" , message: "Error al agregar producto al carrito"})
