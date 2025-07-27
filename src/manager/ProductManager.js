@@ -60,7 +60,7 @@ class ProductManager {
         try {
             const fileData = await fs.promises.readFile(this.pathFile , 'utf-8')
             const products = JSON.parse(fileData)
-            const productIndex = products.findIndex(p => parseInt(p.id) === parseInt(idProduct))
+            const productIndex = products.findIndex(p => p.id === idProduct)
 
 
             if ( productIndex === -1) throw new Error ( `Producto con el ID: ${idProduct}, no pudo ser encontrado` )

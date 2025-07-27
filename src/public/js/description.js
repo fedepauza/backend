@@ -4,6 +4,7 @@ btnAddToCart.addEventListener('click', async () => {
     const productId = btnAddToCart.dataset.id
     const cartId = '64eac9e8e3d4f6c14b78fc0f'
 
+    
     try {
         const response = await fetch(`/api/cart/${cartId}/product/${productId}`, {
             method: 'POST',
@@ -15,6 +16,7 @@ btnAddToCart.addEventListener('click', async () => {
                 const contentType = res.headers.get('content-type')
                 if (!res.ok) {
                 const errorText = await res.text()
+                console.error("Respuesta del servidor:", errorText);
                 throw new Error(`Error HTTP ${res.status}: ${errorText}`)
                 }
                 if (contentType && contentType.includes('application/json')) {
@@ -28,6 +30,6 @@ btnAddToCart.addEventListener('click', async () => {
             .catch(err => console.error("Error al agregar al carrito:", err))
     } 
     catch {
-        res.status(500).json({ status: "Error", message: error.message })
+        console.error("Error al agregar al carrito:");
     }} )
 

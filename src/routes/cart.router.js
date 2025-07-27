@@ -42,8 +42,7 @@ router.post("/api/cart/:cid/product/:pid" , async ( req , res ) => {
             message: "Producto agregado al carrito",
             cart: updatedCart
         })
-
-        res.status(201).json({ status: "Success" , cart: updatedCart })
+    
     } catch (error) {
         res.status(500).json({ status: "Error" , message: "Error al agregar producto al carrito"})
     }
