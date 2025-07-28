@@ -267,17 +267,18 @@
 }
 
 .product-description-card {
-    max-width: 600px;
+    max-width: 400px;
+    height: 100%;
     margin: 32px auto;
     border-radius: 12px;
     overflow: hidden;
-
     box-shadow: 8px 8px 15px rgba(144, 144, 144, 0.358);
     font-family: sans-serif;
 }
 
 .product-img {
-    width: 100%;
+    width: 50%;
+
     object-fit: cover;
 }
 

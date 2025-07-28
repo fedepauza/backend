@@ -31,7 +31,7 @@ app.set("views" , path.resolve(__dirname , 'views') )
 // Routes
 
 app.use('/api/products' , productsRouter)
-app.use('/api/carts' , cartsRouter)
+app.use('/api/cart' , cartsRouter)
 app.use('/', viewsRouter)
 
 

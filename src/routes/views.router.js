@@ -20,6 +20,23 @@ router.get('/cart' , ( req , res ) => {
     res.render('cart' , {title: "Carrito de compras" , isCartPage: 'cart'})
 })
 
+router.get('/cart/:cid' , async ( req , res ) => {
+    const { cid } = req.params;
+
+    try {
+        const cart = await cartManager.getCartById(cid)
+        console.log('🛒 Carrito cargado:', cart);
+        console.log('🧪 Productos en carrito:', cart.products);
+        res.render('cart', {
+            title: 'Mi Carrito',
+            products: cart.products,
+            isCartPage: 'cart'
+        })
+        } catch (error) {
+        console.error('❌ Error al renderizar carrito:', error)
+        res.status(500).send('Error al cargar el carrito')
+    }
+})
 router.get('/description/:pid' , async ( req , res ) => {
     const { pid } = req.params
 
